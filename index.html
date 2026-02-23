@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mensajería WebSocket</title>
+  <style>
+    body { font-family: Arial; margin: 2em; }
+    #chat { border: 1px solid #ccc; height: 300px; overflow-y: auto; margin-bottom: 1em; padding: 1em; }
+    #msg { width: 80%; }
+    #send { width: 18%; }
+  </style>
+</head>
+<body>
+  <h2>Mensajería WebSocket</h2>
+  <div id="chat"></div>
+  <input id="msg" type="text" placeholder="Escribe un mensaje...">
+  <button id="send">Enviar</button>
+  <script>
+    const wsUrl = window.WS_API_URL || "wss://b8xryor8i6.execute-api.us-east-1.amazonaws.com/dev/";
+    const chat = document.getElementById('chat');
+    const ws = new WebSocket(wsUrl);
+    ws.onopen = () => chat.innerHTML += '<div><em>Conectado</em></div>';
+    ws.onmessage = (event) => chat.innerHTML += `<div>${event.data}</div>`;
+    ws.onclose = () => chat.innerHTML += '<div><em>Desconectado</em></div>';
+    document.getElementById('send').onclick = () => {
+      const msg = document.getElementById('msg').value;
+      ws.send(JSON.stringify({ message: msg }));
+      document.getElementById('msg').value = '';
+    };
+  </script>
+</body>
+</html>
