@@ -16,7 +16,7 @@
   <input id="msg" type="text" placeholder="Escribe un mensaje...">
   <button id="send">Enviar</button>
   <script>
-    const wsUrl = window.WS_API_URL || "wss://b8xryor8i6.execute-api.us-east-1.amazonaws.com/dev/";
+    const wsUrl = window.WS_API_URL || "wss://3t4c0l1rmf.execute-api.us-east-1.amazonaws.com/dev/";
     const chat = document.getElementById('chat');
     const ws = new WebSocket(wsUrl);
     ws.onopen = () => chat.innerHTML += '<div><em>Conectado</em></div>';
@@ -30,3 +30,4 @@
   </script>
 </body>
 </html>
+
